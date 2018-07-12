@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<h2>User</h2>
+<form th:action="@{/search}" method = "GET">
+	Search: <input type="text" name="q"/>
+	<input type="submit" name="submit" value="search"/>
+</form>
+<br>
+<a href="/add">Add</a>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Email</th>
+    <th>Update</th>
+    <th>Delete</th>
+  </tr>
+  <tr th:each = "user : ${listUser}">
+  	<td th:text="${user.id}"></td>
+  	<td th:text="${user.email}">}</td>
+  	<td><a th:href="@{/{id}/edit/{email}(id=${user.id},email=${user.email})}">Edit</a></td>
+  	<td><a th:href="@{/{id}/delete(id=${user.id})}">Delete</a></td>
+  </tr>
+</table>
+
+</body>
+</html>
